@@ -31,23 +31,27 @@ def generate_dotfile(dotfile, options):
         temp_writer.write(source)
 
     skip = False
-    progress_printed = False
 
     if os.path.isfile(dotfile['destination']):
         if options.force:
             print("Overwrite {0}?".format(dotfile['destination']))
-            progress_printed = True
         else:
             answer = generate_dialog("Overwrite the existing {0}".format(
                         dotfile['destination']), ('y', 'n'))
             skip = (answer == 'n')
 
     if not skip and not options.dryrun:
-        if not progress_printed:
-            print("Writing to {0}...".format(dotfile['destination']))
+        print("Writing to {0}...".format(dotfile['destination']))
         if not os.path.isdir(os.path.dirname(dotfile['destination'])):
             os.makedirs(os.path.dirname(dotfile['destination']))
         shutil.copyfile(temp_path, dotfile['destination'])
+
+    if options.dryrun:
+        print("The following content will be written to {0}:".format(
+              dotfile['destination']))
+        with open(temp_path, 'r') as fin:
+            print fin.read()
+
     os.unlink(temp_path)
 
 

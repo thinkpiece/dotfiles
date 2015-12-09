@@ -7,6 +7,10 @@
                 "linux":".config/sublime-text-3/Packages/User/",
                 "osx": "Library/Application Support/Sublime Text 3/Packages/User/"
             }
+        },
+        ".gitconfig": {
+            "source": "gitconfig.pref",
+            "compatible_platform": ["linux", "mac"]
         }
     }
 }
