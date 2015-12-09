@@ -1,0 +1,12 @@
+{
+    "dotfiles": {
+        "Preferences.sublime-settings": {
+            "source": "sublime-text-3.pref",
+            "compatible_platform": ["linux", "osx"],
+            "platform_path": {
+                "linux":".config/sublime-text-3/Packages/User/",
+                "osx": "Library/Application Support/Sublime Text 3/Packages/User/"
+            }
+        }
+    }
+}
