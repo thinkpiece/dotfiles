@@ -1,0 +1,44 @@
+" Vim settings by Junyoung Park
+set nocompatible
+
+execute pathogen#infect()
+
+" highlighting the search keyword
+set hlsearch
+" show line number
+set number
+" highlighting the matched brackets
+set showmode
+
+set visualbell
+
+" turn off swap file
+set noswapfile
+set nobackup
+set nowb
+
+" indentation
+set autoindent
+set cindent
+
+set smartindent
+set smarttab
+set expandtab
+
+" tabs
+set ts=4
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+filetype plugin indent on
+
+" appearance
+colorscheme solarized
+set guifont=Monaco:h12
+
+" syntax highlight
+if has("syntax")
+    syntax on
+endif
+

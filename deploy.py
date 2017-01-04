@@ -10,7 +10,7 @@ import tempfile
 import shutil
 
 
-def generate_dialog(message, answers):
+def deploy_dialog(message, answers):
     answer_list = ' [' + '/'.join(answers) + ']'
     while True:
         answer = input(message + ' ' + answer_list + '? ').strip()
@@ -18,7 +18,7 @@ def generate_dialog(message, answers):
             return answer
 
 
-def generate_dotfile(dotfile, options):
+def deploy_dotfile(dotfile, options):
     source = ''
     encoding = dotfile.get('encoding', 'utf8')
     temp_path = None
@@ -36,7 +36,7 @@ def generate_dotfile(dotfile, options):
         if options.force:
             print("Overwrite {0}?".format(dotfile['destination']))
         else:
-            answer = generate_dialog("Overwrite the existing {0}".format(
+            answer = deploy_dialog("Overwrite the existing {0}".format(
                         dotfile['destination']), ('y', 'n'))
             skip = (answer == 'n')
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     opt_parser.add_option('-d', '--dryrun', dest='dryrun',
                           action='store_true', default=False,
                           help="No file will be written, instead be shown.")
-    opt_parser.add_option('-h', '--home', dest='home_path',
+    opt_parser.add_option('-?', '--home', dest='home_path',
                           type='string', default=HOME_DIR,
                           help="Specify the home directory.")
     opt_parser.add_option(-'p', '--platform', dest='platform',
@@ -101,6 +101,6 @@ if __name__ == '__main__':
 
     try:
         for dotfile in dotfiles:
-            generate_dotfile(dotfile, options)
+            deploy_dotfile(dotfile, options)
     except (KeyboardInterrupt, EOFError):
         print("\nAborted.")
