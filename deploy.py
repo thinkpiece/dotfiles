@@ -50,7 +50,7 @@ def deploy_dotfile(dotfile, options):
         print("The following content will be written to {0}:".format(
               dotfile['destination']))
         with open(temp_path, 'r') as fin:
-            print fin.read()
+            print(fin.read())
 
     os.unlink(temp_path)
 
@@ -60,9 +60,11 @@ def get_platform():
         return 'linux'
     if sys.platform.startswith('darwin'):
         return 'osx'
+    if sys.platform.startswith('win'):
+        return 'win'
     return 'others'
 
-if __name__ == '__main__':
+def main():
     HOME_DIR = os.path.expanduser('~')
     PLATFORM = get_platform()
 
@@ -74,10 +76,10 @@ if __name__ == '__main__':
     opt_parser.add_option('-d', '--dryrun', dest='dryrun',
                           action='store_true', default=False,
                           help="No file will be written, instead be shown.")
-    opt_parser.add_option('-?', '--home', dest='home_path',
+    opt_parser.add_option('--home', dest='home_path',
                           type='string', default=HOME_DIR,
                           help="Specify the home directory.")
-    opt_parser.add_option(-'p', '--platform', dest='platform',
+    opt_parser.add_option('--platform', dest='platform',
                           type='string', default=PLATFORM,
                           help="Specify the platform.")
     (options, args) = opt_parser.parse_args()
@@ -89,7 +91,7 @@ if __name__ == '__main__':
     dotfiles = []
 
     for filename, data in preferences['dotfiles'].items():
-        if PLATFORM not in data['compatible_platforms']:
+        if PLATFORM not in data['compatible_platform']:
             continue
         data = data.copy()
         # TODO: use exapndvars() to support the environmental variables
@@ -104,3 +106,7 @@ if __name__ == '__main__':
             deploy_dotfile(dotfile, options)
     except (KeyboardInterrupt, EOFError):
         print("\nAborted.")
+
+
+if __name__ == '__main__':
+    main()
