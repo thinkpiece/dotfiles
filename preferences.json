@@ -4,18 +4,28 @@
             "source": "sublime-text-3.pref",
             "compatible_platform": ["linux", "osx", "win"],
             "platform_path": {
-                "linux":".config/sublime-text-3/Packages/User/",
-                "osx": "Library/Application Support/Sublime Text 3/Packages/User/",
+                "linux": "$HOME/.config/sublime-text-3/Packages/User/",
+                "osx": "$HOME/Library/Application Support/Sublime Text 3/Packages/User/",
                 "win": "%APPDATA%/Sublime Text3/Packages/User"
             }
         },
         ".gitconfig": {
             "source": "gitconfig.pref",
-            "compatible_platform": ["linux", "osx"]
+            "compatible_platform": ["linux", "osx"],
+            "platform_path": {
+                "linux": "$HOME",
+                "osx": "$HOME",
+                "win": "%HOME%"
+            }
         },
         ".vimrc": {
             "source": "vimrc.pref",
-            "compatible_platform": ["linux", "osx"]
+            "compatible_platform": ["linux", "osx"],
+            "platform_path": {
+                "linux": "$HOME",
+                "osx": "$HOME",
+                "win": "%HOME%"
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#
+# Junyoung DIY dotfiles generator
 
 import os
 import sys
@@ -65,7 +67,6 @@ def get_platform():
     return 'others'
 
 def main():
-    HOME_DIR = os.path.expanduser('~')
     PLATFORM = get_platform()
 
     # handling options
@@ -76,9 +77,6 @@ def main():
     opt_parser.add_option('-d', '--dryrun', dest='dryrun',
                           action='store_true', default=False,
                           help="No file will be written, instead be shown.")
-    opt_parser.add_option('--home', dest='home_path',
-                          type='string', default=HOME_DIR,
-                          help="Specify the home directory.")
     opt_parser.add_option('--platform', dest='platform',
                           type='string', default=PLATFORM,
                           help="Specify the platform.")
@@ -95,9 +93,10 @@ def main():
             continue
         data = data.copy()
         # TODO: use exapndvars() to support the environmental variables
-        file_with_path = os.path.join(options.home_path,
-                                      data['platform_path'].get(PLATFORM, ''),
-                                      filename)
+        file_with_path = os.path.join(
+                            os.path.expandvars(
+                                data['platform_path'].get(PLATFORM, '')),
+                                filename)
         data['destination'] = file_with_path
         dotfiles.append(data)
 

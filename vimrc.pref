@@ -1,44 +1,62 @@
-" Vim settings by Junyoung Park
+"No compatibility to traditional vi
 set nocompatible
 
-execute pathogen#infect()
+"True colors
+if $TERM_PROGRAM == "iTerm.app"
+  set termguicolors
+endif
 
-" highlighting the search keyword
-set hlsearch
-" show line number
-set number
-" highlighting the matched brackets
-set showmode
 
-set visualbell
+"vim-plug
+call plug#begin('~/.config/nvim/plugged')
 
-" turn off swap file
-set noswapfile
-set nobackup
-set nowb
 
-" indentation
-set autoindent
-set cindent
+"Plugin list ------------------------------------------------------------------
 
-set smartindent
-set smarttab
-set expandtab
+Plug 'altercation/vim-colors-solarized'
 
-" tabs
-set ts=4
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+"End plugin list --------------------------------------------------------------
+call plug#end()
 
-filetype plugin indent on
-
-" appearance
-colorscheme solarized
-set guifont=Monaco:h12
-
-" syntax highlight
+"syntax highlighting
 if has("syntax")
     syntax on
 endif
 
+"turn off swap file
+set noswapfile
+set nobackup
+set nowb
+
+"tabs
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smarttab
+
+"indentation
+set autoindent
+set cindent
+set smartindent
+
+"keep 80 columns
+set colorcolumn=80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+autocmd WinEnter * match OverLength /\%81v.\+/
+
+if has("gui_running")
+    set background=dark
+    set guioptions=egmrLt
+    set linespace=1
+endif
+
+"show line number
+set number
+"highlight the matched brackets
+set showmode
+
+"color scheme
+colorscheme solarized
+set background=dark
